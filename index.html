@@ -1,82 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Open ShareMe</title>
-
-<style>
-
-body{
-margin:0;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:system-ui;
-background:#0f172a;
-color:white;
-}
-
-button{
-padding:16px 28px;
-font-size:18px;
-border:none;
-border-radius:12px;
-background:#22c55e;
-color:white;
-cursor:pointer;
-}
-
-</style>
-
-</head>
 <body>
 
-<button onclick="openShareMe()">Open ShareMe</button>
+<button onclick="getModel()">Get Phone Model</button>
+
+<p id="result"></p>
 
 <script>
 
-function openShareMe(){
+function getModel(){
 
-// 1️⃣ Try component
-setTimeout(() => {
-location.href =
-"intent:#Intent;" +
-"component=com.xiaomi.midrop/.sender.ui.TransmissionActivity;" +
-"package=com.xiaomi.midrop;" +
-"end";
-}, 0);
+let ua = navigator.userAgent;
 
-
-// 2️⃣ Try launcher
-setTimeout(() => {
-location.href =
-"intent:#Intent;" +
-"action=android.intent.action.MAIN;" +
-"category=android.intent.category.LAUNCHER;" +
-"package=com.xiaomi.midrop;" +
-"end";
-}, 800);
-
-
-// 3️⃣ Try package only
-setTimeout(() => {
-location.href =
-"intent:#Intent;" +
-"package=com.xiaomi.midrop;" +
-"end";
-}, 1600);
-
-
-// 4️⃣ Try scheme
-setTimeout(() => {
-location.href =
-"intent://launch#Intent;" +
-"scheme=miui;" +
-"package=com.xiaomi.midrop;" +
-"end";
-}, 2400);
-
+document.getElementById("result").innerText = ua;
 
 }
 

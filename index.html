@@ -13,7 +13,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-family:system-ui;
-background:#111827;
+background:#0f172a;
 color:white;
 }
 
@@ -38,15 +38,45 @@ cursor:pointer;
 
 function openShareMe(){
 
-// Best intent for Xiaomi ShareMe
+// 1️⃣ Try component
+setTimeout(() => {
+location.href =
+"intent:#Intent;" +
+"component=com.xiaomi.midrop/.sender.ui.TransmissionActivity;" +
+"package=com.xiaomi.midrop;" +
+"end";
+}, 0);
 
+
+// 2️⃣ Try launcher
+setTimeout(() => {
+location.href =
+"intent:#Intent;" +
+"action=android.intent.action.MAIN;" +
+"category=android.intent.category.LAUNCHER;" +
+"package=com.xiaomi.midrop;" +
+"end";
+}, 800);
+
+
+// 3️⃣ Try package only
+setTimeout(() => {
+location.href =
+"intent:#Intent;" +
+"package=com.xiaomi.midrop;" +
+"end";
+}, 1600);
+
+
+// 4️⃣ Try scheme
+setTimeout(() => {
 location.href =
 "intent://launch#Intent;" +
 "scheme=miui;" +
 "package=com.xiaomi.midrop;" +
-"action=android.intent.action.MAIN;" +
-"category=android.intent.category.LAUNCHER;" +
 "end";
+}, 2400);
+
 
 }
 

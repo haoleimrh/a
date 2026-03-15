@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<button onclick="getModel()">Get Phone Model</button>
-
-<p id="result"></p>
-
 <script>
 
 function getModel(){
 
 let ua = navigator.userAgent;
 
-document.getElementById("result").innerText = ua;
+let match = ua.match(/Android\s[\d.]+;\s([^;]+)/);
+
+if(match){
+document.body.innerHTML = "Model: " + match[1];
+}else{
+document.body.innerHTML = ua;
+}
 
 }
 
-</script>
+getModel();
 
-</body>
-</html>
+</script>

@@ -1,19 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Phone Model Detector</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:system-ui;
+}
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#4f46e5,#06b6d4);
+color:white;
+}
+
+.card{
+
+background:white;
+color:black;
+width:340px;
+padding:25px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
+text-align:center;
+
+}
+
+h2{
+margin-top:0;
+}
+
+.info{
+margin-top:15px;
+padding:10px;
+background:#f1f5f9;
+border-radius:10px;
+font-size:14px;
+word-break:break-all;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#4f46e5;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#4338ca;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Phone Model Detector</h2>
+
+<button onclick="detectPhone()">Detect Phone</button>
+
+<div id="result" class="info">
+Press button to detect
+</div>
+
+</div>
+
 <script>
 
-function getModel(){
+function getPhoneName(code){
+
+// Xiaomi / Redmi mapping
+
+if(code.includes("25028RN03I")) return "Redmi A3 / A3x";
+if(code.includes("23124RN87I")) return "Redmi A3";
+if(code.includes("23129RN51X")) return "Redmi A3";
+if(code.includes("23053RN02I")) return "Redmi 12";
+if(code.includes("2201117TG")) return "Redmi Note 11";
+
+if(code.includes("SM-A")) return "Samsung A series";
+if(code.includes("SM-M")) return "Samsung M series";
+if(code.includes("SM-G")) return "Samsung Galaxy";
+
+return "Unknown phone";
+}
+
+
+function detectPhone(){
 
 let ua = navigator.userAgent;
 
-let match = ua.match(/Android\s[\d.]+;\s([^;]+)/);
+let modelMatch = ua.match(/Android\s[\d.]+;\s([^;]+)/);
+let androidMatch = ua.match(/Android\s([\d.]+)/);
 
-if(match){
-document.body.innerHTML = "Model: " + match[1];
-}else{
-document.body.innerHTML = ua;
+let model = modelMatch ? modelMatch[1] : "Unknown";
+let android = androidMatch ? androidMatch[1] : "Unknown";
+
+let name = getPhoneName(model);
+
+document.getElementById("result").innerHTML =
+
+"<b>Phone Name:</b> " + name + "<br><br>" +
+"<b>Model Code:</b> " + model + "<br><br>" +
+"<b>Android:</b> " + android + "<br><br>" +
+"<b>UserAgent:</b><br>" + ua;
+
 }
-
-}
-
-getModel();
 
 </script>
+
+</body>
+</html>
